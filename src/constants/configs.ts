@@ -1,0 +1,2 @@
+export const BASE_URL = 'https://public-api.wordpress.com/rest/v1.1/sites/'
+export const SITE_ID = 107403796

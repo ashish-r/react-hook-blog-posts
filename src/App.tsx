@@ -8,6 +8,7 @@ import ErrorBoundary from './components/common/ErrorBoundary'
 import Header from './components/common/Header'
 import Categories from './components/common/Categories'
 import TopTags from './components/common/TopTags'
+import Footer from './components/common/Footer'
 
 const App = () => {
     const history = createBrowserHistory()
@@ -33,10 +34,17 @@ const App = () => {
                         </Router>
                     </div>
                     <div className="side-bar">
-                        <Categories/>
-                        <TopTags/>
+                        <div className="categories-container">
+                            <h2> Categories </h2>
+                            <Categories/>
+                        </div>
+                        <div className="top-tags-container">
+                            <h2> Top Tags </h2>
+                            <TopTags/>
+                        </div>
                     </div>
                 </div>
+                <Footer/>
             </div>
         </ErrorBoundary>
     )
