@@ -18,7 +18,7 @@ const TopTags = () => {
                     topTags.map(
                         ({slug, name}) => (
                             <p key={slug} onClick={() => navigateTo(`/tag/${slug}`)}>
-                                {`${name}: ${slug}`}
+                                {`${name}`}
                             </p>
                         )
                     )

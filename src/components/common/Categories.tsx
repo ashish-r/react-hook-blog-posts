@@ -17,7 +17,7 @@ const Categories = () => {
                     categories.map(
                         ({slug, name}) => (
                             <p key={slug} onClick={() => navigateTo(`/category/${slug}`)}>
-                                {`${name}: ${slug}`} 
+                                {`${name}`} 
                             </p>
                         )
                     )

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { BASE_URL, SITE_ID } from '../constants/configs'
+import { IGenericObject } from '../interfaces'
 
 export async function get(url: string) {
 	return axios
@@ -12,8 +13,12 @@ export async function get(url: string) {
 		})
 }
 
-// export function transitTo(url: string) {
-// 	browserHistory.
-// }
+export function objectToQueryString(query: IGenericObject<string|number>): string {
+	return Object.keys(query)
+		.map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(query[k])}`)
+		.join('&')
+}
 
-// static/term-product/src/api/main.ts
+export function stringifyObjectValues(obj: IGenericObject<any>): IGenericObject<string> {
+	return Object.keys(obj).reduce((acc, key) => ({ ...acc, key: obj[key] + ''}), {})
+}

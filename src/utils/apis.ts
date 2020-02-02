@@ -1,12 +1,27 @@
-import { useState, useEffect } from 'react'
-import { get } from "./common"
+import { useState, useEffect, } from 'react'
+import { get, objectToQueryString, stringifyObjectValues, } from "./common"
 import * as urls from "../constants/urls"
-import { ITopTagsResponse, ITopTag, ICategoriesResponse, ICategory, IAPIState } from "../interfaces"
+import {
+    ITopTagsResponse,
+    ITopTag,
+    ICategoriesResponse,
+    ICategory,
+    IAPIState,
+    IBlogFeedsQueryParams,
+    IBlogFeedsResponse,
+    IBlogFeed,
+    IAction,
+} from "../interfaces"
+import { useDispatch } from 'react-redux'
+import { Dispatch } from 'redux'
+import { ACTION_TYPES } from '../store/actions'
 
 export function useGetCategories(): IAPIState<ICategory[] | undefined> {
     const [categories, setCategories] = useState<IAPIState<ICategory[] | undefined>>(
         {isLoading: true, data: undefined}
     )
+
+    const dispatch: Dispatch<IAction> = useDispatch()
 
     useEffect(() => {
         (async() => {
@@ -21,7 +36,7 @@ export function useGetCategories(): IAPIState<ICategory[] | undefined> {
             )
         })()
     }, [])
-
+    dispatch({type: ACTION_TYPES.SAVE_CATEGORIES, payload: {data: categories.data}})
     return { ...categories }
 }
 
@@ -29,6 +44,8 @@ export function useGetTopTags(): IAPIState<ITopTag[] | undefined> {
     const [topTags, setCategories] = useState<IAPIState<ITopTag[] | undefined>>(
         {isLoading: true, data: undefined}
     )
+    
+    const dispatch: Dispatch<IAction> = useDispatch()
 
     useEffect(() => {
         (async() => {
@@ -44,5 +61,47 @@ export function useGetTopTags(): IAPIState<ITopTag[] | undefined> {
         })()
     }, [])
 
+    dispatch({type: ACTION_TYPES.SAVE_TOP_TAGS, payload: {data: topTags.data}})
+
     return { ...topTags }
+}
+
+export function useGetBlogs(
+    query: IBlogFeedsQueryParams
+): IAPIState<IBlogFeed[] | undefined> {
+    const [blogs, setBlogs] = useState<IAPIState<{
+        feed?: IBlogFeed[] 
+        totalCount: number
+    }>>(
+        {isLoading: true, data: {feed: undefined, totalCount: 0}}
+    )
+    const queryString = objectToQueryString(stringifyObjectValues(query))
+
+    const dispatch: Dispatch<IAction> = useDispatch()
+
+    useEffect(() => {
+        (async() => {
+            const response: IBlogFeedsResponse | undefined = await get(`${urls.POSTS_FEED_URL}&${queryString}`)
+            setBlogs(
+                {
+                    isLoading: false, 
+                    data: {
+                        feed: response && response.posts && response.posts,
+                        // .map(
+                        //     ({name, slug}) => ({name, slug})
+                        // ),
+                        totalCount: (response && response.found) || 0
+                    }
+                }
+            )
+        })()
+    }, [queryString])
+
+    dispatch(
+        {
+            type: ACTION_TYPES.SAVE_BLOG_FEEDS,
+            payload: {data: blogs.data, totalCount: blogs.data.totalCount}
+        }
+    )
+    return { data: blogs.data.feed, isLoading: blogs.isLoading }
 }
