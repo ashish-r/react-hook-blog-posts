@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from 'react'
-import { getCategories } from '../../utils/apis'
-import { ICategory, IAPIState } from '../../interfaces'
+import React  from 'react'
+import { useGetCategories } from '../../utils/apis'
+import { navigateTo } from '../../utils/router'
 
 const Categories = () => {
-    const [categories, setCategories] = useState<IAPIState<ICategory[] | undefined>>(
-        {isLoading: true, data: undefined}
-    )
-    
-    useEffect(() => {
-        (async() => {
-            setCategories({isLoading: false, data: await getCategories()})
-        })()
-    }, [])
-
-    if(categories.isLoading) {
+    const {isLoading, data: categories} = useGetCategories()
+    if(isLoading) {
         return <p>Loading....</p>
     }
-    return !categories.data ? 
+    return !categories ? 
         (
             <p>Loading Categories Failed </p>
         ) :
         (
             <>
                 {
-                    categories.data.map(({slug, name}) => (<p key={slug}> {`${name}: ${slug}`} </p>))
+                    categories.map(
+                        ({slug, name}) => (
+                            <p key={slug} onClick={() => navigateTo(`/category/${slug}`)}>
+                                {`${name}: ${slug}`} 
+                            </p>
+                        )
+                    )
                 }
             </>
         )

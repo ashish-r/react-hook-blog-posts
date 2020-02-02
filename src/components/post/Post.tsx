@@ -1,11 +1,10 @@
 import React from 'react'
 
-export interface IPostProps {
-  postId?: string
+interface IPostProps {
+
 }
 
-const App = (props: IPostProps) => {
-  console.log(props)
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">

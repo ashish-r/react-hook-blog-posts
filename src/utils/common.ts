@@ -12,4 +12,8 @@ export async function get(url: string) {
 		})
 }
 
+// export function transitTo(url: string) {
+// 	browserHistory.
+// }
+
 // static/term-product/src/api/main.ts

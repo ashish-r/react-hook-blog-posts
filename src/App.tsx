@@ -1,36 +1,30 @@
 import React from 'react'
 import './css/index.css'
 import Home from './components/home/Home'
-import Post, { IPostProps } from './components/post/Post'
-import { Router, Route, RouteComponentProps } from 'react-router'
-import { createBrowserHistory } from "history"
-import ErrorBoundary from './components/common/ErrorBoundary'
+import Post from './components/post/Post'
+import { Router, Route, Switch } from 'react-router-dom'
 import Header from './components/common/Header'
 import Categories from './components/common/Categories'
 import TopTags from './components/common/TopTags'
 import Footer from './components/common/Footer'
+import { history } from './utils/router'
+
 
 const App = () => {
-    const history = createBrowserHistory()
     return (
-        <ErrorBoundary>
             <div>
                 <Header/>
                 <div id="container">
                     <div className="containt-section">
                         <Router history={history}>
-                            <Route
-                                key="post"
-                                path="/post/:postId"
-                                component={
-                                    (props: RouteComponentProps<IPostProps>) => <Post postId={props.match.params.postId}/>
-                                }
-                            />
-                            <Route
-                                key="home"
-                                path="/"
-                                component={() => <Home msg="reload"/>}
-                            />
+                            <Switch>
+                                <Route path="/post/:postId">
+                                    <Post />
+                                </Route>
+                                <Route path="/">
+                                    <Home />
+                                </Route>
+                            </Switch>
                         </Router>
                     </div>
                     <div className="side-bar">
@@ -46,7 +40,7 @@ const App = () => {
                 </div>
                 <Footer/>
             </div>
-        </ErrorBoundary>
+        
     )
 }
 

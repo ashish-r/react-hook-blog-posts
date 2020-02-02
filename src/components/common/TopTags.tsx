@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { getTopTags } from '../../utils/apis'
-import { ITopTag, IAPIState } from '../../interfaces'
+import React from 'react'
+import { useGetTopTags } from '../../utils/apis'
+import { navigateTo } from '../../utils/router'
 
 const TopTags = () => {
-    const [topTags, setTopTags] = useState<IAPIState<ITopTag[] | undefined>>(
-        {isLoading: true, data: undefined}
-    )
-    
-    useEffect(() => {
-        (async() => {
-            setTopTags({isLoading: false, data: await getTopTags()})
-        })()
-    }, [])
+    const {isLoading, data: topTags} = useGetTopTags()
 
-    if(topTags.isLoading) {
+    if(isLoading) {
         return <p>Loading....</p>
     }
-    return !topTags.data ? 
+    return !topTags ? 
         (
             <p>Loading Top Tags Failed </p>
         ) :
         (
             <>
                 {
-                    topTags.data.map(({slug, name}) => (<p key={slug}> {`${name}: ${slug}`} </p>))
+                    topTags.map(
+                        ({slug, name}) => (
+                            <p key={slug} onClick={() => navigateTo(`/tag/${slug}`)}>
+                                {`${name}: ${slug}`}
+                            </p>
+                        )
+                    )
                 }
             </>
         )

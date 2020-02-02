@@ -1,8 +1,9 @@
 import React from 'react'
+import { navigateTo } from '../../utils/router'
 
 const Header = () => (
     <div className="header-main">
-        <h1 className="site-title"><a href="/" rel="home">Truecaller Blog</a></h1>
+        <h1 className="site-title" onClick={() => navigateTo('/')}>Truecaller Blog</h1>
     </div>
 )
 
