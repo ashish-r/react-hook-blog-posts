@@ -67,7 +67,8 @@ export function useGetTopTags(): IAPIState<ITopTag[] | undefined> {
 }
 
 export function useGetBlogs(
-    query: IBlogFeedsQueryParams
+    query: IBlogFeedsQueryParams,
+    shouldAppend: boolean = true
 ): IAPIState<IBlogFeed[] | undefined> {
     const [blogs, setBlogs] = useState<IAPIState<{
         feed?: IBlogFeed[] 
@@ -76,20 +77,44 @@ export function useGetBlogs(
         {isLoading: true, data: {feed: undefined, totalCount: 0}}
     )
     const queryString = objectToQueryString(stringifyObjectValues(query))
-
     const dispatch: Dispatch<IAction> = useDispatch()
 
     useEffect(() => {
         (async() => {
             const response: IBlogFeedsResponse | undefined = await get(`${urls.POSTS_FEED_URL}&${queryString}`)
+            const newFeed = response && response.posts && response.posts.map(
+                ({
+                    author,
+                    categories,
+                    content,
+                    date,
+                    excerpt,
+                    featured_image,
+                    id,
+                    slug,
+                    tags,
+                    title,
+                }) => ({
+                    author,
+                    categories,
+                    content,
+                    date,
+                    excerpt,
+                    featured_image,
+                    id,
+                    slug,
+                    tags,
+                    title,
+                })
+            )
             setBlogs(
                 {
                     isLoading: false, 
                     data: {
-                        feed: response && response.posts && response.posts,
-                        // .map(
-                        //     ({name, slug}) => ({name, slug})
-                        // ),
+                        feed: [
+                            ...((shouldAppend && blogs.data.feed) || []),
+                            ...(newFeed || [])
+                        ],
                         totalCount: (response && response.found) || 0
                     }
                 }

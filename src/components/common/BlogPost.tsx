@@ -6,7 +6,10 @@ const BlogPost = ({post}: {post: IBlogFeed}) => {
     return (
         < article className="topcontent " >
             <header>
-                <img src={`${post.featured_image}`} alt="Post Thumbnail" className="post-thumbnail" />
+                {
+                    post.featured_image && 
+                    (<img src={`${post.featured_image}`} alt="Post Thumbnail" className="post-thumbnail"/>)
+                }
                 <h2 className="post-title">
                     { post.title }
                 </h2>

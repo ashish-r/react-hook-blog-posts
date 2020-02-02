@@ -31,8 +31,12 @@ h1,p {
   height: auto;
 }
 .feeds-container {
-  max-width: 75%;
+  width: 75%;
   float: right;
+}
+.feeds-container h4 {
+  text-transform: capitalize;
+  margin-bottom: 30px;
 }
 
 .header-image-container img{
@@ -63,6 +67,9 @@ h1,p {
   margin-bottom: 6px;
   border-left: 5px solid rgba(0,0,0,.87);;
 }
+.site-title span {
+  cursor: pointer;
+}
 
 @media only screen and (max-width: 700px) {
   .container {
@@ -75,7 +82,7 @@ h1,p {
     margin: 0;
   }
   .feeds-container {
-    max-width: 100%;
+    width: 100%;
   }
   .side-container {
     border-top: 5px solid rgba(0,0,0,.87);;

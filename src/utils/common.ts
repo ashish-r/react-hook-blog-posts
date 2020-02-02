@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { BASE_URL, SITE_ID } from '../constants/configs'
 import { IGenericObject } from '../interfaces'
+import { useRef, useEffect } from 'react'
 
 export async function get(url: string) {
 	return axios
@@ -20,5 +21,13 @@ export function objectToQueryString(query: IGenericObject<string|number>): strin
 }
 
 export function stringifyObjectValues(obj: IGenericObject<any>): IGenericObject<string> {
-	return Object.keys(obj).reduce((acc, key) => ({ ...acc, key: obj[key] + ''}), {})
+	return Object.keys(obj).reduce((acc, key) => ({ ...acc, [key]: obj[key] + ''}), {})
+}
+
+export function useGetPrevious(value: any): any {
+	const ref = useRef()
+	useEffect(() => {
+	  ref.current = value;
+	}, [value])
+	return ref.current;
 }

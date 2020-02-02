@@ -4,7 +4,11 @@ import { navigateTo } from '../../utils/router'
 const Header = () => (
     <div className="header-main">
         <div className="header-title">
-            <h1 className="site-title" onClick={() => navigateTo('/')}>Truecaller Blog</h1>
+            <h1 className="site-title">
+                <span onClick={() => navigateTo('/')}>
+                    Truecaller Blog
+                </span>
+            </h1>
         </div>
         <header className="header-image-container">
             <img 

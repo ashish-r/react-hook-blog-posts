@@ -65,10 +65,12 @@ export interface IBlogFeedsResponse {
 }
 
 export interface IRootState {
-    topTags?: ITopTag[],
-    categories?: ICategory[],
-    blogs?: IBlogFeed[],
-    totalBlogs: number
+    blog: {
+        topTags?: ITopTag[],
+        categories?: ICategory[],
+        blogs?: IBlogFeed[],
+        totalBlogs: number
+    }
 }
 
 export interface IAction {

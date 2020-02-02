@@ -20,6 +20,9 @@ const App = () => {
                             <Route path="/post/:postId">
                                 <SinglePost />
                             </Route>
+                            <Route path="/:type/:subType">
+                                <Home />
+                            </Route>
                             <Route path="/">
                                 <Home />
                             </Route>
