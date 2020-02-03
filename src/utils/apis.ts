@@ -11,8 +11,9 @@ import {
     IBlogFeedsResponse,
     IBlogFeed,
     IAction,
+    IRootState,
 } from "../interfaces"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ACTION_TYPES } from '../store/actions'
 
@@ -66,6 +67,38 @@ export function useGetTopTags(): IAPIState<ITopTag[] | undefined> {
     return { ...topTags }
 }
 
+export function useGetBlogPost(postId: number, postSlug: string): IAPIState<IBlogFeed | undefined> {
+    const [blogPost, setBlogPost] = useState<IAPIState<IBlogFeed | undefined>>(
+        {isLoading: true, data: undefined}
+    )
+    const blogs = useSelector((state: IRootState) => state.blog.blogs) || []
+    useEffect(() => {
+        const post = blogs.find(({ID, slug}) => ((ID === postId) && (slug === postSlug)))
+        if(post){
+            setBlogPost(
+                {
+                    isLoading: false, 
+                    data: post,
+                }
+            )
+        }
+        else{
+            (async() => {
+                const response: IBlogFeed | undefined = await get(`${urls.SINGLE_POST_URL}${postId}`)
+                setBlogPost(
+                    {
+                        isLoading: false, 
+                        data: response,
+                    }
+                )
+            })()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    return { ...blogPost }
+}
+
 export function useGetBlogs(
     query: IBlogFeedsQueryParams,
     shouldAppend: boolean = true
@@ -90,7 +123,7 @@ export function useGetBlogs(
                     date,
                     excerpt,
                     featured_image,
-                    id,
+                    ID,
                     slug,
                     tags,
                     title,
@@ -101,7 +134,7 @@ export function useGetBlogs(
                     date,
                     excerpt,
                     featured_image,
-                    id,
+                    ID,
                     slug,
                     tags,
                     title,
@@ -120,12 +153,13 @@ export function useGetBlogs(
                 }
             )
         })()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [queryString])
 
     dispatch(
         {
             type: ACTION_TYPES.SAVE_BLOG_FEEDS,
-            payload: {data: blogs.data, totalCount: blogs.data.totalCount}
+            payload: {data: blogs.data.feed, totalCount: blogs.data.totalCount}
         }
     )
     return { data: blogs.data.feed, isLoading: blogs.isLoading }

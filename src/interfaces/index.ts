@@ -40,7 +40,7 @@ export interface IBlogFeedsQueryParams {
 }
 
 export interface IBlogFeed {
-    id: number
+    ID: number
     author: {
         name: string
         avatar_URL: string

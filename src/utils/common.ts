@@ -27,7 +27,38 @@ export function stringifyObjectValues(obj: IGenericObject<any>): IGenericObject<
 export function useGetPrevious(value: any): any {
 	const ref = useRef()
 	useEffect(() => {
-	  ref.current = value;
+		ref.current = value
 	}, [value])
-	return ref.current;
+	return ref.current
+}
+
+export function timeInAge(endDate: Date, startDate: Date = new Date()): string{
+    const duration = startDate.getTime() - endDate.getTime()
+    /*86400000 milliseconds = 1 day */
+	const durationInDays = Math.floor(duration / 86400000)
+	if (durationInDays > 20)
+    {
+        return endDate.toDateString()
+    }
+    if (durationInDays > 1)
+    {
+        return `${durationInDays} days ago`
+    }
+    if (durationInDays === 1)
+    {
+        return 'Yesterday'
+    }
+    /*3600000 milliseconds = 1 hour */
+    const durationInHours = Math.floor(duration / 3600000) 
+    if (durationInHours >= 1)
+    {
+        return `${durationInHours} ${(durationInHours === 1 ? 'hour ago' : 'hours ago')}`
+    }
+    /*60000 milliseconds = 1 minute */
+    const durationInMinutes = Math.floor(duration / 60000 )
+    if (durationInMinutes >= 1)
+    {
+        return `${durationInMinutes} ${(durationInMinutes === 1 ? 'minute ago' : 'minutes ago')}`
+    }
+    return 'Just now'
 }

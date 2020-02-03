@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { useGetBlogs } from '../../utils/apis'
 import BlogPost from '../common/BlogPost'
 import { NO_OF_FFEDS } from '../../constants/configs'
@@ -6,9 +6,12 @@ import { useLocation } from 'react-router'
 import { IBlogFeedsQueryParams, IGenericObject, IRootState } from '../../interfaces'
 import { useGetPrevious } from '../../utils/common'
 import { useSelector } from 'react-redux'
+import { navigateTo } from '../../utils/router'
+import { booleanTypeAnnotation } from '@babel/types'
 
 const Home = () => {
     const [page, setPage] = useState(1)
+    useEffect(() => window.scrollTo(0, 0), [])
     const { pathname: locationPath } = useLocation()
     const [routeType, routeSlug] = locationPath.split('/').slice(1)
     const previousLocationPath = useGetPrevious(locationPath)
@@ -26,11 +29,11 @@ const Home = () => {
     const pathInfo = useMemo(
         () => showPathInfo ? 
             `${routeType} Archives: ${
-                ((routeType == 'category' ? categories: topTags)
+                ((routeType === 'category' ? categories: topTags)
                 .find(({slug}) => slug === routeSlug) || {})['name']
             }` :
             '',
-        [routeType, routeSlug, categories, topTags]
+        [showPathInfo, routeType, routeSlug, categories, topTags]
     )
     return (
         <div className="feeds-container">
@@ -49,9 +52,13 @@ const Home = () => {
                     {
                         blogFeeds.data.map(
                             blog => (
-                                <div key={blog.slug}>
+                                <div 
+                                    className="blog-feed-navigation"
+                                    key={`${blog.slug}-${blog.ID}`}
+                                    onClick={() => navigateTo(`/post/${blog.ID}/${blog.slug}`)}
+                                >
                                     <BlogPost post={blog}/>
-                                    <div>Continue Reading → </div>
+                                    <div className="click-continue">Continue Reading → </div>
                                 </div>
                             )
                         )
@@ -59,9 +66,13 @@ const Home = () => {
                     {
                         (totalPosts > page * NO_OF_FFEDS) && 
                         (
-                            (blogFeeds.data.length === (page - 1) * NO_OF_FFEDS) ?
-                            (<button> Loading... </button>) : 
-                            (<button onClick={()=>setPage(page + 1)}> Older Posts </button>)
+                            <div className="view-more-btn-container">
+                                {
+                                    (blogFeeds.data.length === (page - 1) * NO_OF_FFEDS) ?
+                                    (<button> Loading... </button>) : 
+                                    (<button onClick={()=>setPage(page + 1)}> Older Posts </button>)
+                                }
+                            </div>
                         )
                     }
                 </>):

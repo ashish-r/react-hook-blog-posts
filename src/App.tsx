@@ -17,7 +17,7 @@ const App = () => {
                 <div className="main-container">
                     <Router history={history}>
                         <Switch>
-                            <Route path="/post/:postId">
+                            <Route path="/post/:postId/:postSlug">
                                 <SinglePost />
                             </Route>
                             <Route path="/:type/:subType">

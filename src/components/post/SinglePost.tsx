@@ -1,27 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import BlogPost from '../common/BlogPost'
+import { useLocation } from 'react-router'
+import { useGetBlogPost } from '../../utils/apis'
 
-interface IPostProps {
-
+const SinglePost = () => {
+    useEffect(() => window.scrollTo(0, 0), [])
+    const { pathname: locationPath } = useLocation()
+    const [postId, postSlug] = locationPath.split('/').slice(2)
+    const { data: post, isLoading } = useGetBlogPost(+postId, postSlug)
+    return (
+        <div className="feeds-container">
+        {
+            isLoading ? 
+            (<h2>Loading...</h2>) :
+            post ? 
+            (<BlogPost post={ post } showCompletePost={true} />) : 
+            (<h2>Error Loading Data!!</h2>)
+        }
+        </div>
+    )
 }
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to {typeof 'postId'}.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  )
-}
-
-export default App
+export default SinglePost
