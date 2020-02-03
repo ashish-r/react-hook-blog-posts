@@ -39,10 +39,13 @@ const BlogPost = ({post, showCompletePost = false}: {post: IBlogFeed, showComple
                     • &nbsp;  
                     { timeInAge(new Date(post.date)) }
                 </div>
-                <div className="post-meta">
-                    • &nbsp;  
-                    { post.author.name }
-                </div>
+                {post.author && post.author.name && 
+                (
+                    <div className="post-meta">
+                        • &nbsp;  
+                        { post.author.name }
+                    </div>
+                )}
             </footer>
             <div className="content-section">
                 <div dangerouslySetInnerHTML={
