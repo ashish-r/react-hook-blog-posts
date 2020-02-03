@@ -137,6 +137,7 @@ h1,p {
 }
 .post-meta {
     margin-right: 25px;
+    cursor: pointer;
 }
 .article-tag {
     font-size: 10px;
@@ -150,6 +151,7 @@ h1,p {
     text-align: center;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .blog-feed-navigation .article-tag {
     margin-top: 5px;

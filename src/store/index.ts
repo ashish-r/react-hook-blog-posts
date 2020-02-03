@@ -13,4 +13,4 @@ const composeEnhancers = (window as any)['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__']
 
 const Store = createStore(combineReducers(reducers), composeEnhancers(applyMiddleware(...middlewares)))
 
-export default Store;
+export default Store

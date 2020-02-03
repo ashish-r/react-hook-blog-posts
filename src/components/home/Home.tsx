@@ -4,7 +4,7 @@ import BlogPost from '../common/BlogPost'
 import { NO_OF_FFEDS } from '../../constants/configs'
 import { useLocation } from 'react-router'
 import { IBlogFeedsQueryParams, IGenericObject, IRootState } from '../../interfaces'
-import { useGetPrevious } from '../../utils/common'
+import { useGetPrevious, decodeSlug } from '../../utils/common'
 import { useSelector } from 'react-redux'
 import { navigateTo } from '../../utils/router'
 
@@ -28,8 +28,9 @@ const Home = () => {
     const pathInfo = useMemo(
         () => showPathInfo ? 
             `${routeType} Archives: ${
-                ((routeType === 'category' ? categories: topTags)
-                .find(({slug}) => slug === routeSlug) || {})['name']
+                (((routeType === 'category' ? categories: topTags)
+                .find(({slug}) => slug === routeSlug) || {})['name']) ||
+                decodeSlug(routeSlug)
             }` :
             '',
         [showPathInfo, routeType, routeSlug, categories, topTags]

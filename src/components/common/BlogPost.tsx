@@ -1,6 +1,6 @@
 import React  from 'react'
 import { IBlogFeed } from '../../interfaces'
-import { timeInAge } from '../../utils/common'
+import { timeInAge, stopEventBubbleAndCall } from '../../utils/common'
 import { navigateTo } from '../../utils/router'
 
 const BlogPost = ({post, showCompletePost = false}: {post: IBlogFeed, showCompletePost?: boolean}) => {
@@ -19,9 +19,12 @@ const BlogPost = ({post, showCompletePost = false}: {post: IBlogFeed, showComple
                                     className="article-category"
                                     key={category}
                                     onClick={
-                                        () => navigateTo(
-                                            `/category/${post.categories[category]['slug']}`
-                                        )
+                                        (event) => stopEventBubbleAndCall(
+                                            () => navigateTo(
+                                                `/category/${post.categories[category]['slug']}`
+                                            ),
+                                            event
+                                        ) 
                                     }
                                 >
                                     {category}
@@ -60,9 +63,12 @@ const BlogPost = ({post, showCompletePost = false}: {post: IBlogFeed, showComple
                                     className="article-tag"
                                     key={tag}
                                     onClick={
-                                        () => navigateTo(
-                                            `/tag/${post.tags[tag]['slug']}`
-                                        )
+                                        (event) => stopEventBubbleAndCall(
+                                            () => navigateTo(
+                                                `/tag/${post.tags[tag]['slug']}`
+                                            ),
+                                            event
+                                        ) 
                                     }
                                 >
                                     {tag}

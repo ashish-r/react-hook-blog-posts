@@ -62,3 +62,12 @@ export function timeInAge(endDate: Date, startDate: Date = new Date()): string{
     }
     return 'Just now'
 }
+
+export function decodeSlug(slug: string): string {
+    return slug.split('-').join(' ')
+}
+
+export function stopEventBubbleAndCall(func: Function, event: React.MouseEvent): void {
+    event.stopPropagation()
+    func()
+}
