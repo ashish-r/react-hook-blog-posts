@@ -7,7 +7,6 @@ import { IBlogFeedsQueryParams, IGenericObject, IRootState } from '../../interfa
 import { useGetPrevious } from '../../utils/common'
 import { useSelector } from 'react-redux'
 import { navigateTo } from '../../utils/router'
-import { booleanTypeAnnotation } from '@babel/types'
 
 const Home = () => {
     const [page, setPage] = useState(1)
