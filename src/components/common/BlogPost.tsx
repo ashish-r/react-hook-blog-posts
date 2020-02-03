@@ -36,9 +36,11 @@ const BlogPost = ({post, showCompletePost = false}: {post: IBlogFeed, showComple
             </header>
             <footer className="post-meta-container">
                 <div className="post-meta">
+                    • &nbsp;  
                     { timeInAge(new Date(post.date)) }
                 </div>
                 <div className="post-meta">
+                    • &nbsp;  
                     { post.author.name }
                 </div>
             </footer>

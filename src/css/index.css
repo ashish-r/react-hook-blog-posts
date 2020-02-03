@@ -164,6 +164,8 @@ h1,p {
     cursor: pointer;
     padding: 10px 20px;
     font-weight: 600;
+    width: 120px;
+    text-align: center;
 }
 
 @media only screen and (max-width: 700px) {
