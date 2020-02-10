@@ -1,6 +1,6 @@
 {
-  "short_name": "Truecaller Blog",
-  "name": "Truecaller Blog Posts",
+  "short_name": "React Blog",
+  "name": "React Hooks Blog with Truecaller API",
   "icons": [
     {
       "src": "favicon.ico",

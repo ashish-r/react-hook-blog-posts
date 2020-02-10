@@ -6,14 +6,14 @@ const Header = () => (
         <div className="header-title">
             <h1 className="site-title">
                 <span onClick={() => navigateTo('/')}>
-                    Truecaller Blog
+                    React Hooks Blog
                 </span>
             </h1>
         </div>
         <header className="header-image-container">
             <img 
             src="https://truecaller.blog/wp-content/uploads/2017/03/cropped-blog-header.png" 
-            alt="Truecaller Header"
+            alt="Header"
             />
         </header>
     </div>

@@ -1,8 +1,8 @@
 {
-  "name": "truecaller-blog-posts",
+  "name": "react-hook-blog-posts",
   "version": "0.1.0",
   "author": "Ashish Ranjan",
-  "description": "Truecaller blog based on API Wordpress API",
+  "description": "React Hooks blog based on Truecaller blog Wordpress API",
   "dependencies": {
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
