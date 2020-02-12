@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-hooks-blog-demo/static/css/main.1a069694.chunk.css",
+    "main.js": "/react-hooks-blog-demo/static/js/main.0b89b2af.chunk.js",
+    "main.js.map": "/react-hooks-blog-demo/static/js/main.0b89b2af.chunk.js.map",
+    "runtime-main.js": "/react-hooks-blog-demo/static/js/runtime-main.b3677a6d.js",
+    "runtime-main.js.map": "/react-hooks-blog-demo/static/js/runtime-main.b3677a6d.js.map",
+    "static/js/2.651d5bbe.chunk.js": "/react-hooks-blog-demo/static/js/2.651d5bbe.chunk.js",
+    "static/js/2.651d5bbe.chunk.js.map": "/react-hooks-blog-demo/static/js/2.651d5bbe.chunk.js.map",
+    "index.html": "/react-hooks-blog-demo/index.html",
+    "precache-manifest.082a7846df4d054be28ba42e83ed38b3.js": "/react-hooks-blog-demo/precache-manifest.082a7846df4d054be28ba42e83ed38b3.js",
+    "service-worker.js": "/react-hooks-blog-demo/service-worker.js",
+    "static/css/main.1a069694.chunk.css.map": "/react-hooks-blog-demo/static/css/main.1a069694.chunk.css.map",
+    "static/js/2.651d5bbe.chunk.js.LICENSE.txt": "/react-hooks-blog-demo/static/js/2.651d5bbe.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b3677a6d.js",
+    "static/js/2.651d5bbe.chunk.js",
+    "static/css/main.1a069694.chunk.css",
+    "static/js/main.0b89b2af.chunk.js"
+  ]
+}
