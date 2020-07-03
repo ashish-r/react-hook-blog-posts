@@ -1,3 +1,4 @@
+[![DeepScan grade](https://deepscan.io/api/teams/10012/projects/12688/branches/199327/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10012&pid=12688&bid=199327)
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
