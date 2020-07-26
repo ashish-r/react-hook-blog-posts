@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Ashish Ranjan",
   "description": "React Hooks blog demo based on Truecaller blog Wordpress API",
-  "homepage": "http://ashish-r.github.io/react-hooks-blog-demo",
+  "homepage": "/",
   "dependencies": {
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
