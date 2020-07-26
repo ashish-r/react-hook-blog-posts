@@ -1,4 +1,7 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/83e32c24-21b3-4340-94a7-f23507d01f8e/deploy-status)](https://app.netlify.com/sites/react-hooks-blog-demo/deploys)
 [![DeepScan grade](https://deepscan.io/api/teams/10012/projects/12688/branches/199327/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10012&pid=12688&bid=199327)
+
+`Preview:` https://react-hooks-blog-demo.netlify.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -27,3 +30,4 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
